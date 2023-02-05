@@ -114,4 +114,7 @@ public class Account {
                 ", password='" + password + '\'' +
                 '}';
     }
+    public boolean existsByUsername(String username2) {
+        return false;
+    }
 }
