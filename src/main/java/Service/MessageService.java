@@ -16,6 +16,7 @@ public class MessageService {
     }
 
     public Message addMessage(Message message){
+        if(message.message_text.isEmpty() || message.message_text.length() < 255) return null;
         return messageDAO.creatMessage(message);
     }
 
@@ -26,28 +27,23 @@ public class MessageService {
     public Message updateMessage(int message_id, Message message){
         Message messageFromDb = this.messageDAO.getMessageById(message_id);
 
-        if(messageFromDb == null || message.message_text.length() > 255) return null;
-        //if(message_text == null) return null; 
-
-        messageDAO.updateMessage(message_id, message);
+        if(messageFromDb == null || message.message_text.length() > 255 || message.message_text.isEmpty()) return null;
+          messageDAO.updateMessage(message_id, message);
         return this.messageDAO.getMessageById(message_id);
     }
     
     public Message getMessageById(int message_id) {
         return messageDAO.getMessageById(message_id);
+
     }
     
-    public Message deleteMessage(int message_id, Message message) {
-        Message messageFromDb = this.messageDAO.getMessageById(message_id);
-
-        if(messageFromDb == null) return null; 
-
-        messageDAO.deleteMessage(message_id, message);
-        return this.messageDAO.getMessageById(message_id);
+    public Message deleteMessage(int message_id) {
+        return messageDAO.deleteMessage(message_id);
+        }
         
-    }
-    public List<Message> getMessagesByAccountId(int account_id) {
-        return null;
+         
+    public List<Message> getMessagesByAccountId(int posted_by) {
+        return messageDAO.getAllMessagesFromUserGivenAccount(posted_by);
     }
     
 }
