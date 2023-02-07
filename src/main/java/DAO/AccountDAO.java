@@ -14,7 +14,7 @@ public class AccountDAO {
         Connection connection = ConnectionUtil.getConnection();
         try {
             //Write SQL logic here
-            String sql = "insert into account (account_id, username, password) values (?, ?, ?);" ;
+            String sql = "insert into account (username, password) values (?, ?);" ;
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             //write preparedStatement's setString and setInt methods here.
@@ -32,6 +32,11 @@ public class AccountDAO {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public Account verifyAccount(Account account) {
+        
+    
     }
 }
     

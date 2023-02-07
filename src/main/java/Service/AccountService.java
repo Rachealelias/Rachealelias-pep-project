@@ -18,10 +18,10 @@ public class AccountService {
     
    
     public Account addAccount(Account account) {
-        //int isbn = book.getIsbn();
-        /*if(bookDAO.getBookByIsbn(isbn) != null){
-            return null;
-    }*/
+
+        if(account.username == null || account.password.length() < 4 || account.username.isEmpty()) return null;
+        //if(message_text == null) return null; 
+
         return accountDAO.openAccount(account);
         
     
